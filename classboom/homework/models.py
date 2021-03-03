@@ -15,4 +15,4 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_document = models.FileField(upload_to="upload/%Y/%m/%d", validators=[validate_document_file_extension])
     score = models.DecimalField(max_digits=4, decimal_places=2, validators=[validate_score])
-
+    student_id = models.BigIntegerField(default=999988777)

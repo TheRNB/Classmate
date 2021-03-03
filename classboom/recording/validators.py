@@ -7,4 +7,3 @@ def validate_video_file_extension(value):
     valid_extensions = ['.ogg', '.mp4', '.webm', '.mov', '.wmv', '.flv', '.avi', '.avchd', '.mkv']
     if not ext.lower() in valid_extensions:
         raise ValidationError('Unsupported file extension.')
-
