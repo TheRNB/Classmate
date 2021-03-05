@@ -21,21 +21,27 @@
 
     <body>
 
-    <h2>لیست تکالیف</h2>
+    <h2>لیست پاسخ ها</h2>
 
     <table>
       <tr>
-        <th>عنوان</th>
-        <th>تاریخ ایجاد</th>
-        <th>فایل سوالات</th>
-        <th>توضیحات اضافی</th>
+        <th>شماره دانشجویی</th>
+        <th>تاریخ آخرین ارسال</th>
+        <th>آخرین مهلت ارسال</th>
+        <th>نمره فعلی</th>
+        <th>تغییر نمره</th>
       </tr>
-      {% for ques in question %}
+      {% for ans in answer.answer_set.all %}
         <tr>
-            <td><a href="/hw/prf/{{ques.id}}" >{{ques.question_title}}</a></td>
-            <td>{{ques.pub_date}}</td>
+            <td>{{ans.user.get_username}}</td>
+            <td>{{ans.upload_date}}</td>
             <td><p>TO BE ADDED</p></td>
-            <td>{{ques.explanation}}</td>
+            {% if ans.score != Null %}
+                <td>{{ans.score}}</td>
+            {% else %}
+                <td>-</td>
+            {% endif %}
+            <td><p>TO BE ADDED</p>></td>
         </tr>
       {% endfor %}
 

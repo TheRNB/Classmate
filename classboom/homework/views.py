@@ -3,20 +3,21 @@
 from django.shortcuts import render, redirect
 from django.views import View
 # from django.views.generic import TemplateView
-from homework.models import Answer
+from homework.models import Answer, Question
 
 
 class ProfessorHomework(View):
     template_name = 'professor_homework.html'
 
     def get(self, request):
-        answer = Answer.objects.all()
-        return render(request, self.template_name, context={'document': answer.answer_document,
-                                                            'scores': answer.score,
-                                                            'ids': answer.student_id})
+        question = Question.objects.all()
+        return render(request, self.template_name, context={"question": question})
 
-    def post(self, request):
-        pass
+
+class ProfessorHomeworkSpecificAnswer(View):
+    def get(self, request, id):
+        answer = Question.objects.get(id=id)
+        return render(request, 'professor_homework_answer.html', context={"answer": answer})
 
 
 class StudentHomework(View):
