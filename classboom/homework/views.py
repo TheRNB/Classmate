@@ -21,10 +21,7 @@ class ProfessorHomeworkSpecificAnswer(View):
 
 
 class StudentHomework(View):
-    template_name = 'student_homework.html'
-
     def get(self, request):
-        return render(request, self.template_name)
-
-    def post(self, request):
-        pass
+        question = Question.objects.all()
+        current_user = request.user
+        return render(request, 'student_homework.html', context={"question": question, "current_user": current_user})

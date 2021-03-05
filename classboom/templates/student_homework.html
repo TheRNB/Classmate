@@ -1,42 +1,57 @@
-<p style="text-align: right;">دانشجویان گرامی خوش آمدید</p>
-<p style="text-align: right;">در حال حاظر شما در صفحه تکالیف هستید</p>
-<table style="border-collapse: collapse; width: 100%; height: 90px;" border="1">
-<tbody>
-<tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;"><strong>تغییر نمره</strong></td>
-<td style="width: 20%; height: 18px; text-align: center;"><strong>نمره فعلی</strong></td>
-<td style="width: 20%; height: 18px; text-align: center;"><strong>فایل ارسالی</strong></td>
-<td style="width: 20%; height: 18px; text-align: center;"><strong>تاریخ آخرین ارسال</strong></td>
-<td style="width: 20%; height: 18px; text-align: center;"><strong>شماره دانشجویی</strong></td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;"><a title="shomare" href="TESTURL">shomare</a></td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-</tr>
-<tr style="height: 18px;">
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-<td style="width: 20%; height: 18px; text-align: center;">&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
+<html>
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+
+    <body>
+
+    <h2>لیست تکالیف</h2>
+
+    <table>
+      <tr>
+        <th>عنوان</th>
+        <th>آخرین تاریخ ارسال</th>
+        <th>فایل سوالات</th>
+        <th>توضیحات اضافی</th>
+        <th>ارسال پاسخ</th>
+        <th>نمره فعلی</th>
+      </tr>
+      {% for ques in question %}
+        <tr>
+            <td>{{ques.question_title}}</td>
+            {% if user.answer_id_list.all %}
+                <td>{{ans.upload_date}}</td>
+            {% else %}
+                <td>---</td>
+            {% endif %}
+            <td><p>TO BE ADDED</p></td>
+            <td>{{ques.explanation}}</td>
+            <td><a href = "">ارسال پاسخ</a></td>
+            {% if user.answer_id_list.all %}
+                <td>TO BE ADDED</td>
+            {% else %}
+                <td>-</td>
+            {% endif %}
+        </tr>
+      {% endfor %}
+
+    </table>
+
+    </body>
+</html>
