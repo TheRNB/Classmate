@@ -38,13 +38,16 @@ class ProfessorHomeworkCreation(View):
 
 
 class ProfessorHomeworkSpecificAnswer(View):
+    template_name = 'professor_homework_answer.html'
+
     def get(self, request, id):
         answer = Question.objects.get(id=id)
-        return render(request, 'professor_homework_answer.html', context={"answer": answer})
+        return render(request, self.template_name, context={"answer": answer})
 
 
 class StudentHomework(View):
+    template_name = 'student_homework.html'
+
     def get(self, request):
         question = Question.objects.all()
-        current_user = request.user
-        return render(request, 'student_homework.html', context={"question": question, "current_user": current_user})
+        return render(request, self.template_name, context={"question": question})

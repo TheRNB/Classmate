@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+
+    <body>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <p>شما استاد درس هستید. لطفا برای دسترسی به ویدئو ها از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+        {% else %}
+            <h2>لیست ویدئو ها</h2>
+
+            <table>
+              <tr>
+                <th>عنوان</th>
+                <th>تاریخ آپلود</th>
+                <th>مشاهده</th>
+              </tr>
+              {% for vids in videos %}
+                <tr>
+                    <td>{{vids.title}}</td>
+                    <td>{{vids.pub_date}}</td>
+                    <td><p>TO BE ADDED</p></td>
+                </tr>
+              {% endfor %}
+            </table>
+        {% endif %}
+    {% else %}
+        <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+    {% endif %}
+    </body>
+</html>

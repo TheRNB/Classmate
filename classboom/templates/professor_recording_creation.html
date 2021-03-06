@@ -6,10 +6,10 @@
 <body>
     <main>
         {% if user.is_staff %}
-            <form method="post" action="/hw/prf/">
+            <form method="post" action="/rec/prf/">
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" name="save">Create</button>
+                <button type="submit" name="save">Upload</button>
             </form>
         {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>

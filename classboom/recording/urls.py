@@ -1,11 +1,12 @@
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from .views import ProfessorRecording, StudentRecording
+from .views import *
 
 
 urlpatterns = [
     # Student homework page
-    path('stu/', StudentRecording.as_view()),
+    path('stu/', StudentRecording.as_view(), name="student_recording"),
     # Professor homework page
-    path('prf/', ProfessorRecording.as_view()),
+    path('prf/', ProfessorRecording.as_view(), name="professor_recording"),
+    path('prf/prc/', ProfessorRecordingCreation.as_view(), name="professor_recording_creation"),
 ]

@@ -20,38 +20,43 @@
     </head>
 
     <body>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <p>شما استاد درس هستید. لطفا برای دسترسی به تکالیف از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+        {% else %}
+            <h2>لیست تکالیف</h2>
 
-    <h2>لیست تکالیف</h2>
-
-    <table>
-      <tr>
-        <th>عنوان</th>
-        <th>آخرین تاریخ ارسال</th>
-        <th>فایل سوالات</th>
-        <th>توضیحات اضافی</th>
-        <th>ارسال پاسخ</th>
-        <th>نمره فعلی</th>
-      </tr>
-      {% for ques in question %}
-        <tr>
-            <td>{{ques.question_title}}</td>
-            {% if user.answer_id_list.all %}
-                <td>{{ans.upload_date}}</td>
-            {% else %}
-                <td>---</td>
-            {% endif %}
-            <td><p>TO BE ADDED</p></td>
-            <td>{{ques.explanation}}</td>
-            <td><a href = "">ارسال پاسخ</a></td>
-            {% if user.answer_id_list.all %}
-                <td>TO BE ADDED</td>
-            {% else %}
-                <td>-</td>
-            {% endif %}
-        </tr>
-      {% endfor %}
-
-    </table>
-
+            <table>
+              <tr>
+                <th>عنوان</th>
+                <th>آخرین تاریخ ارسال</th>
+                <th>فایل سوالات</th>
+                <th>توضیحات اضافی</th>
+                <th>ارسال پاسخ</th>
+                <th>نمره فعلی</th>
+              </tr>
+              {% for ques in question %}
+                <tr>
+                    <td>{{ques.question_title}}</td>
+                    {% if user.answer_id_list.all %}
+                        <td>{{ans.upload_date}}</td>
+                    {% else %}
+                        <td>---</td>
+                    {% endif %}
+                    <td><p>TO BE ADDED</p></td>
+                    <td>{{ques.explanation}}</td>
+                    <td><a href = "">ارسال پاسخ</a></td>
+                    {% if user.answer_id_list.all %}
+                        <td>TO BE ADDED</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                </tr>
+              {% endfor %}
+            </table>
+        {% endfor %}
+    {% else %}
+        <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+    {% endif %}
     </body>
 </html>
