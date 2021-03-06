@@ -1,0 +1,19 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Creat</title>
+</head>
+<body>
+    <main>
+        {% if user.is_staff %}
+            <form method="post" action="/hw/prf/">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" name="save">Create</button>
+            </form>
+        {% else %}
+            <p>please <a href="{% url 'login' %}">login</a> first</p>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,9 +1,10 @@
 # from django.shortcuts import render
-# from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 # from django.views.generic import TemplateView
-from homework.models import Answer, Question
+from .models import Answer, Question
+from .form import HomeworkCreationForm
 
 
 class ProfessorHomework(View):
@@ -12,6 +13,28 @@ class ProfessorHomework(View):
     def get(self, request):
         question = Question.objects.all()
         return render(request, self.template_name, context={"question": question})
+
+    def post(self, request):
+        form = HomeworkCreationForm()
+
+
+class ProfessorHomeworkCreation(View):
+    template_name = 'professor_homework_creation.html'
+
+    def get(self, request):
+        form = HomeworkCreationForm()
+        return render(request, self.template_name, context={"form": form})
+
+    def post(self, request, response):
+        form = HomeworkCreationForm(response.POST)
+        if form.is_valid():
+            title = form.cleaned_data["question_title"]
+            deadline = form.cleaned_data["deadline_date"]
+            info = form.cleaned_data["explanation"]
+            document = form.cleaned_data["document"]
+            new_homework = Question(question_title=title, deadline_date=deadline, explanation=info, document=document)
+            new_homework.save()
+            return HttpResponseRedirect("/hw/prf")
 
 
 class ProfessorHomeworkSpecificAnswer(View):

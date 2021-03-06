@@ -1,17 +1,23 @@
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>ClassBoom</title>
+    <meta charset="utf-8">
+    <title>ClassBoom</title>
 </head>
 <body>
-  <main>
-    {% if user.is_authenticated %}
-      Hi {{ user.username }}!
-      <p>if you want to log out please click <a href="{% url 'logout' %}">here</a></p>
-      <!-- <p>if you wish to change your password please click <a href="{% url 'password_change' %}">here</a></p> -->
-    {% else %}
-      <p>Please login from <a href="{% url 'login' %}">here</a>. </p>
-    {% endif %}
-  </main>
+    <main>
+        {% if user.is_authenticated %}
+            Hi {{ user.username }}!
+                {% if user.is_staff %}
+                    <p><a href = "">فیلم های کلاس</a></p>
+                    <p><a href = "{% url 'professor_homework' %}">تکالیف</a></p>
+                {% else %}
+                    <p><a href = "">فیلم های کلاس</a></p>
+                    <p><a href = "{% url 'student_homework' %}">تکالیف</a></p>
+                {% endif %}
+            <p>if you want to log out please click <a href="{% url 'logout' %}">here</a></p>
+        {% else %}
+            <p>please <a href="{% url 'login' %}">login</a> first</p>
+        {% endif %}
+    </main>
 </body>
 </html>
