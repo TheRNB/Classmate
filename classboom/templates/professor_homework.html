@@ -41,16 +41,12 @@
           {% endfor %}
 
         </table>
-        <button onclick="location.href='{% url 'professor_homework_creation' %}'" type="button">
-             TO BE ADDEDاضافه کردن تمرین</button>
-        <form action="/hw/prf/hwc">
-            <input type="submit" value="TO BE ADDEDاضافه کردن تمرین" />
-        </form>
-        <form action="/">
-            <input type="submit" value="بازگشت" />
-        </form>
-        {% else %}
+
+        <button onclick="location.href='{% url 'professor_homework_creation' %}'" type="button">اضافه کردن تمرین</button>
+        <br/>
+        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
+    {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
-        {% endif %}
+    {% endif %}
     </body>
 </html>

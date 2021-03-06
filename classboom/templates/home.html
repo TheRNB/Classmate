@@ -8,11 +8,17 @@
         {% if user.is_authenticated %}
             سلام {{ user.username }}!
                 {% if user.is_staff %}
-                    <p><a href = "{% url 'professor_recording' %}">فیلم های کلاس</a></p>
-                    <p><a href = "{% url 'professor_homework' %}">تکالیف</a></p>
+                    <br/>
+                    <button onclick="location.href='{% url 'professor_recording' %}'" type="button">
+                         فیلم های کلاس</button>
+                    <br/>
+                    <button onclick="location.href='{% url 'professor_homework' %}'" type="button">
+                         تمارین</button>
                 {% else %}
-                    <p><a href = "{% url 'student_recording' %}">فیلم های کلاس</a></p>
-                    <p><a href = "{% url 'student_homework' %}">تکالیف</a></p>
+                    <button onclick="location.href='{% url 'student_recording' %}'" type="button">
+                         فیلم های کلاس</button>
+                    <button onclick="location.href='{% url 'student_homework' %}'" type="button">
+                         تمارین</button>
                 {% endif %}
             <p>اگر می خواهید از حساب خود خارج شوید، لطفا از  <a href="{% url 'logout' %}">اینجا</a> اقدام کنید.</p>
         {% else %}

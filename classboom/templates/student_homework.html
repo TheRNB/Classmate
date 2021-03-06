@@ -54,7 +54,8 @@
                 </tr>
               {% endfor %}
             </table>
-        {% endfor %}
+        {% endif %}
+        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
     {% else %}
         <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
     {% endif %}

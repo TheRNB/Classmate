@@ -9,8 +9,10 @@
             <form method="post" action="/rec/prf/">
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" name="save">Upload</button>
+                <button type="submit" name="save">آپلود!</button>
             </form>
+            <br/>
+            <button onclick="location.href='{% url 'professor_recording' %}'" type="button">بازگشت</button>
         {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
         {% endif %}

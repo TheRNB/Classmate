@@ -9,8 +9,10 @@
             <form method="post" action="/hw/prf/">
                 {% csrf_token %}
                 {{form.as_p}}
-                <button type="submit" name="save">Create</button>
+                <button type="submit" name="save">ساخت!</button>
             </form>
+            <br/>
+            <button onclick="location.href='{% url 'professor_homework' %}'" type="button">بازگشت</button>
         {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
         {% endif %}

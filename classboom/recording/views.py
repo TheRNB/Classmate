@@ -16,7 +16,15 @@ class ProfessorRecording(View):
         return render(request, self.template_name, context={"videos": recording})
 
     def post(self, request):
-        pass
+        form = RecordingCreationForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            video = form.cleaned_data["video"]
+            new_video = Recording(title=title, video=video)
+            new_video.save()
+            return HttpResponseRedirect("/rec/prf")
+        else:
+            return HttpResponseRedirect("/rec/prf/prc")
 
 
 class ProfessorRecordingCreation(View):
@@ -26,15 +34,16 @@ class ProfessorRecordingCreation(View):
         form = RecordingCreationForm()
         return render(request, self.template_name, context={"form": form})
 
-    def post(self, request, response):
-        form = RecordingCreationForm(response.POST)
+    def post(self, request):
+        form = RecordingCreationForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data["title"]
-            pub_date = form.cleaned_data["pub_date"]
             video = form.cleaned_data["video"]
-            new_video = Recording(title=title, pub_date=pub_date, video=video)
+            new_video = Recording(title=title, video=video)
             new_video.save()
             return HttpResponseRedirect("/rec/prf")
+        else:
+            return HttpResponseRedirect("/rec/prf/prc")
 
 
 class StudentRecording(View):

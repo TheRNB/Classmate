@@ -39,13 +39,10 @@
           {% endfor %}
 
         </table>
-        <button onclick="location.href='{% url 'professor_recording_creation' %}'" type="button">
-             TO BE ADDEDاضافه کردن ویدئو</button>
-        <form action="/">
-            <input type="submit" value="بازگشت" />
-        </form>
-        {% else %}
+        <button onclick="location.href='{% url 'professor_recording_creation' %}'" type="button">TO BE ADDED اضافه کردن ویدئو</button>
+        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
+    {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
-        {% endif %}
+    {% endif %}
     </body>
 </html>

@@ -7,7 +7,7 @@ urlpatterns = [
     # Student homework page
     path('stu/', StudentHomework.as_view(), name="student_homework"),
     # Professor homework page
-    path('prf/', ProfessorHomework.as_view(), name="professor_homework"),
-    path('prf/hwc', ProfessorHomeworkCreation.as_view(), name="professor_homework_creation"),
     path('prf/<int:id>', ProfessorHomeworkSpecificAnswer.as_view()),
+    path('prf/hwc', ProfessorHomeworkCreation.as_view(), name="professor_homework_creation"),
+    path('prf/', ProfessorHomework.as_view(), name="professor_homework"),
 ]

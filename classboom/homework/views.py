@@ -15,8 +15,17 @@ class ProfessorHomework(View):
         return render(request, self.template_name, context={"question": question})
 
     def post(self, request):
-        form = HomeworkCreationForm()
-
+        form = HomeworkCreationForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["question_title"]
+            deadline = form.cleaned_data["deadline_date"]
+            info = form.cleaned_data["explanation"]
+            document = form.cleaned_data["document"]
+            new_homework = Question(question_title=title, deadline_date=deadline, explanation=info, document=document)
+            new_homework.save()
+            return redirect("professor_homework")
+        else:
+            return redirect("professor_homework_creation")
 
 class ProfessorHomeworkCreation(View):
     template_name = 'professor_homework_creation.html'
@@ -25,8 +34,8 @@ class ProfessorHomeworkCreation(View):
         form = HomeworkCreationForm()
         return render(request, self.template_name, context={"form": form})
 
-    def post(self, request, response):
-        form = HomeworkCreationForm(response.POST)
+    def post(self, request):
+        form = HomeworkCreationForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data["question_title"]
             deadline = form.cleaned_data["deadline_date"]
@@ -34,7 +43,9 @@ class ProfessorHomeworkCreation(View):
             document = form.cleaned_data["document"]
             new_homework = Question(question_title=title, deadline_date=deadline, explanation=info, document=document)
             new_homework.save()
-            return HttpResponseRedirect("/hw/prf")
+            return redirect("professor_homework")
+        else:
+            return redirect("professor_homework_creation")
 
 
 class ProfessorHomeworkSpecificAnswer(View):
