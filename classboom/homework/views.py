@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 # from django.views.generic import TemplateView
 from homework.models import Answer, Question
-from datetime import datetime
+
 
 class ProfessorHomework(View):
     template_name = 'professor_homework.html'
@@ -15,18 +15,13 @@ class ProfessorHomework(View):
 
 
 class ProfessorHomeworkSpecificAnswer(View):
-    template_name = 'professor_homework_answer.html'
-
     def get(self, request, id):
         answer = Question.objects.get(id=id)
-        return render(request, self.template_name, context={"answer": answer})
+        return render(request, 'professor_homework_answer.html', context={"answer": answer})
 
 
 class StudentHomework(View):
-    template_name = 'student_homework.html'
-
     def get(self, request):
         question = Question.objects.all()
         current_user = request.user
-        return render(request, self.template_name, context={"question": question, "current_user": current_user,
-                                                            "current_time": datetime.now()})
+        return render(request, 'student_homework.html', context={"question": question, "current_user": current_user})

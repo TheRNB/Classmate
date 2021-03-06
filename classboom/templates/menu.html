@@ -1,0 +1,16 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ClassBoom</title>
+</head>
+<body>
+    <main>
+        {% if user.is_authenticated %}
+            Hi {{ user.username }}!
+            <p>if you want to log out please click <a href="{% url 'logout' %}">here</a></p>
+        {% else %}
+            <p>please <a href="{% url 'login' %}">login</a> first</p>
+        {% endif %}
+    </main>
+</body>
+</html>

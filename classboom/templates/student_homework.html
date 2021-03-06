@@ -35,33 +35,19 @@
       {% for ques in question %}
         <tr>
             <td>{{ques.question_title}}</td>
-            <td>-</td>
+            {% if user.answer_id_list.all %}
+                <td>{{ans.upload_date}}</td>
+            {% else %}
+                <td>---</td>
+            {% endif %}
             <td><p>TO BE ADDED</p></td>
             <td>{{ques.explanation}}</td>
-            {% if ques.deadline_date >= current_time %}
-                <td><a href = "">ارسال پاسخ</a></td>
+            <td><a href = "">ارسال پاسخ</a></td>
+            {% if user.answer_id_list.all %}
+                <td>TO BE ADDED</td>
             {% else %}
-                <td>مهلت ارسال پاسخ تمام شده است</td>
+                <td>-</td>
             {% endif %}
-            <td>-</td>
-            {% for ans in question.answer_set.all %}
-                {% if ans.user == current_user %}
-                    <td>{{ques.question_title}}</td>
-                    <td>ans.upload_date</td>
-                    <td><p>TO BE ADDED</p></td>
-                    <td>{{ques.explanation}}</td>
-                    {% if ques.deadline_date >= current_time %}
-                        <td><a href = "">ارسال پاسخ</a></td>
-                    {% else %}
-                        <td>مهلت ارسال پاسخ تمام شده است</td>
-                    {% endif %}
-                    {% if ans.score != Null%}
-                        <td>ans.score</td>
-                    {% else %}
-                        <td>-</td>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
         </tr>
       {% endfor %}
 
