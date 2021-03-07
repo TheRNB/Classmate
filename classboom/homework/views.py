@@ -55,21 +55,20 @@ class StudentHomework(ProfessorHomework):
 
 class StudentHomeworkCreation(View):
     template_name = 'student_homework_creation.html'
-    current_id = 0
 
     def get(self, request, id):
         form = HomeworkUploadForm()
-        self.current_id = id
         explanation = Question.objects.get(id=id)
         return render(request, self.template_name, context={"form": form, "explanation": explanation.explanation})
 
     def post(self, request, id):
         form = HomeworkUploadForm(request.POST, request.FILES)
-        self.current_id = id
         if form.is_valid():
-            ans = Answer(form, question=Question.objects.get(id=self.current_id))
+            question = Question.objects.get(id=id)
+            answer = question.answer_set.create(user=request.user)
+            answer.answer_document = form.cleaned_data['answer_document']
             # form.save()
-            ans.save()
+            answer.save()
             return redirect("student_homework")
         else:
             form = HomeworkUploadForm()

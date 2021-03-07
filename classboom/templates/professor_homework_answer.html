@@ -28,6 +28,7 @@
           <tr>
             <th>شماره دانشجویی</th>
             <th>تاریخ آخرین ارسال</th>
+            <th>فایل ارسالی</th>
             <th>نمره فعلی</th>
             <th>تغییر نمره</th>
           </tr>
@@ -35,6 +36,7 @@
             <tr>
                 <td>{{ans.user.get_username}}</td>
                 <td>{{ans.upload_date}}</td>
+                <td><a  href="{{ans.answer_document.url}}" download>دانلود</a></td>
                 {% if ans.score != Null %}
                     <td>{{ans.score}}</td>
                 {% else %}

@@ -11,7 +11,7 @@ class HomeworkCreationForm(ModelForm):
 class HomeworkUploadForm(ModelForm):
     class Meta:
         model = Answer
-        fields = ['answer_document', ]
+        fields = ['answer_document']
 
 
 class HomeworkScoreForm(ModelForm):
