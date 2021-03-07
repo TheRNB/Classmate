@@ -6,10 +6,10 @@
 <body>
   <main>
     <h2>ورود</h2>
-    <form method="post">
+    <form method="post" action='/login/' enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">وارد شو!</button>
+      <button type="submit" id="submit">وارد شو!</button>
     </form>
   </main>
 </body>

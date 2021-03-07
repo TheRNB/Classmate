@@ -1,0 +1,16 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+</head>
+<body>
+  <main>
+    <h2>ساخت حساب دانشجو</h2>
+    <form method="post" action='{% url "reg" %}' enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" id="submit">ساخت</button>
+    </form>
+  </main>
+</body>
+</html>

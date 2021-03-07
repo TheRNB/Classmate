@@ -12,6 +12,8 @@
                     <button onclick="location.href='{% url 'professor_recording' %}'" type="button">فیلم های کلاس</button>
                     <br>
                     <button onclick="location.href='{% url 'professor_homework' %}'" type="button">تمارین</button>
+                    <br>
+                    <button onclick="location.href='/login/register/'" type="button">ساخت حساب دانشجو</button>
                 {% else %}
                     <br>
                     <button onclick="location.href='{% url 'student_recording' %}'" type="button">فیلم های کلاس</button>
@@ -20,8 +22,7 @@
                 {% endif %}
             <p>اگر می خواهید از حساب خود خارج شوید، لطفا از  <a href="{% url 'logout' %}">اینجا</a> اقدام کنید</p>
         {% else %}
-            <p>لطفا ابتدا <a href="{% url 'login' %}">وارد</a> شوید</p>
-            <p>اگر ادمین هستید لطفا از <a href="/admin">اینجا</a> وارد شوید</p>
+            <p>لطفا ابتدا <a href='/login/'>وارد</a> شوید</p>
         {% endif %}
     </main>
 </body>

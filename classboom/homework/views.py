@@ -1,9 +1,6 @@
-# from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from datetime import datetime
-# from django.views.generic import TemplateView
 from .models import Answer, Question
 from .form import HomeworkCreationForm, HomeworkUploadForm
 
@@ -34,8 +31,7 @@ class ProfessorHomeworkCreation(View):
             return redirect("professor_homework")
         else:
             form = HomeworkCreationForm()
-            # return render(request, self.template_name, context={"form": form})
-            return HttpResponse("You done goofed")
+            return render(request, self.template_name, context={"form": form})
 
 
 class ProfessorHomeworkSpecificAnswer(View):
@@ -63,16 +59,14 @@ class StudentHomework(ProfessorHomework):
         questions = []
         current_time = datetime.now()
         for quest in Question.objects.all():
-            print("$$$$", quest.deadline_date)
-            if quest.answer_set.all():
+            try:
                 answer = quest.answer_set.get(user=request.user)
-                if answer:
-                    answers.append(answer)
-                else:
-                    questions.append(quest)
+            except:
+                answer = None
+            if answer:
+                answers.append(answer)
             else:
                 questions.append(quest)
-        print("####", current_time)
         return render(request, self.template_name, context={"question": questions, "answer": answers,
                                                             "current_time": current_time})
 
@@ -89,9 +83,9 @@ class StudentHomeworkCreation(View):
         form = HomeworkUploadForm(request.POST, request.FILES)
         if form.is_valid():
             question = Question.objects.get(id=id)
-            if question.answer_set.all():
+            try:
                 answer = question.answer_set.get(user=request.user)
-            else:
+            except:
                 answer = None
             if answer:
                 answer.answer_document = form.cleaned_data['answer_document']
