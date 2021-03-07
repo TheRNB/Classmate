@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 # from django.views.generic import TemplateView
@@ -15,17 +15,6 @@ class ProfessorRecording(View):
         recording = Recording.objects.all()
         return render(request, self.template_name, context={"videos": recording})
 
-    def post(self, request):
-        form = RecordingCreationForm(request.POST, request.FILES)
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            video = form.cleaned_data["video"]
-            new_video = Recording(title=title, video=video)
-            new_video.save()
-            return redirect("professor_recording")
-        else:
-            return redirect("professor_recording_creation")
-
 
 class ProfessorRecordingCreation(View):
     template_name = 'professor_recording_creation.html'
@@ -37,13 +26,11 @@ class ProfessorRecordingCreation(View):
     def post(self, request):
         form = RecordingCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            title = form.cleaned_data["title"]
-            video = form.cleaned_data["video"]
-            new_video = Recording(title=title, video=video)
-            new_video.save()
+            form.save()
             return redirect("professor_recording")
         else:
-            return redirect("professor_recording_creation")
+            form = RecordingCreationForm()
+            return render(request, self.template_name, context={"form": form})
 
 
 class ProfessorRecordingStream(View):
@@ -54,9 +41,9 @@ class ProfessorRecordingStream(View):
         return render(request, self.template_name, context={"vid": video})
 
 
-class StudentRecording(View):
+class StudentRecording(ProfessorRecording):
     template_name = 'student_recording.html'
 
-    def get(self, request):
-        recording = Recording.objects.all()
-        return render(request, self.template_name, context={"videos": recording})
+
+class StudentRecordingStream(ProfessorRecordingStream):
+    template_name = 'student_recording_stream.html'

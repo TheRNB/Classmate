@@ -18,9 +18,10 @@
                     <br>
                     <button onclick="location.href='{% url 'student_homework' %}'" type="button">تمارین</button>
                 {% endif %}
-            <p>اگر می خواهید از حساب خود خارج شوید، لطفا از  <a href="{% url 'logout' %}">اینجا</a> اقدام کنید.</p>
+            <p>اگر می خواهید از حساب خود خارج شوید، لطفا از  <a href="{% url 'logout' %}">اینجا</a> اقدام کنید</p>
         {% else %}
-            <p>لطفا ابتدا <a href="{% url 'login' %}">وارد</a> شوید.</p>
+            <p>لطفا ابتدا <a href="{% url 'login' %}">وارد</a> شوید</p>
+            <p>اگر ادمین هستید لطفا از <a href="/admin">اینجا</a> وارد شوید</p>
         {% endif %}
     </main>
 </body>

@@ -1,8 +1,10 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Recording
 
-from .validators import validate_video_file_extension
 
-
-class RecordingCreationForm(forms.Form):
-    title = forms.CharField(max_length=200, label="عنوان")
-    video = forms.FileField(label="ویدئو", validators=[validate_video_file_extension])
+class RecordingCreationForm(ModelForm):
+    class Meta:
+        model = Recording
+        fields = ['title', 'video']
+        # fields = "__all__"
