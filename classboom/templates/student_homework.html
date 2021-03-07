@@ -47,12 +47,16 @@
                     <td>{{ques.explanation}}</td>
                     {% if current_time.date < ques.deadline_date.date %}
                         <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
-                    {% elif current_time.date == ques.deadline_date.date %}
-                        {% if current_time.time < ques.deadline_date.time %}
-                            <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
-                        {% endif %}
                     {% else %}
-                        <td>مهلت ارسال پاسخ تمام شده است</td>
+                        {% if current_time.date == ques.deadline_date.date %}
+                            {% if current_time.time < ques.deadline_date.time %}
+                                <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                            {% else %}
+                                <td>مهلت ارسال پاسخ تمام شده است</td>
+                            {% endif %}
+                        {% else %}
+                            <td>مهلت ارسال پاسخ تمام شده است</td>
+                        {% endif %}
                     {% endif %}
                     <td>-</td>
                 </tr>
