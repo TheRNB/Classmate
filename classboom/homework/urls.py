@@ -7,6 +7,7 @@ from .views import *
 
 urlpatterns = [
     # Student homework page
+    path('stu/<int:id>', StudentHomeworkCreation.as_view(), name="student_homework_upload"),
     path('stu/', StudentHomework.as_view(), name="student_homework"),
     # Professor homework page
     path('prf/<int:id>', ProfessorHomeworkSpecificAnswer.as_view()),

@@ -7,4 +7,3 @@ class RecordingCreationForm(ModelForm):
     class Meta:
         model = Recording
         fields = ['title', 'video']
-        # fields = "__all__"

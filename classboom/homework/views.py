@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 # from django.views.generic import TemplateView
 from .models import Answer, Question
-from .form import HomeworkCreationForm
+from .form import HomeworkCreationForm, HomeworkUploadForm
 
 
 class ProfessorHomework(View):
@@ -39,6 +39,40 @@ class ProfessorHomeworkSpecificAnswer(View):
         answer = Question.objects.get(id=id)
         return render(request, self.template_name, context={"answer": answer})
 
+    def get(self, request, id):
+        form = HomeworkUploadForm(request.POST)
+        if form.is_valid():
+            ans = Answer.objects.get(id=id)
+            ans.score = form.score
+            ans.save()
+            return redirect("professor_homework")
+        else:
+            return render(request, self.template_name, {"form": form})
+
 
 class StudentHomework(ProfessorHomework):
     template_name = 'student_homework.html'
+
+
+class StudentHomeworkCreation(View):
+    template_name = 'student_homework_creation.html'
+    current_id = 0
+
+    def get(self, request, id):
+        form = HomeworkUploadForm()
+        self.current_id = id
+        explanation = Question.objects.get(id=id)
+        return render(request, self.template_name, context={"form": form, "explanation": explanation.explanation})
+
+    def post(self, request, id):
+        form = HomeworkUploadForm(request.POST, request.FILES)
+        self.current_id = id
+        if form.is_valid():
+            ans = Answer(form, question=Question.objects.get(id=self.current_id))
+            # form.save()
+            ans.save()
+            return redirect("student_homework")
+        else:
+            form = HomeworkUploadForm()
+            explanation = Question.objects.get(id=id).explanation
+            return render(request, self.template_name, context={"form": form, "explanation": explanation})

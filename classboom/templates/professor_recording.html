@@ -34,12 +34,12 @@
             <tr>
                 <td>{{vids.title}}</td>
                 <td>{{vids.pub_date}}</td>
-                <td><a href="{% url 'professor_video_stream' vids.id %}">مشاهده</a></td>
+                <td><a href="{% url 'professor_recording_stream' vids.id %}">مشاهده</a></td>
             </tr>
           {% endfor %}
 
         </table>
-        <button onclick="location.href='{% url 'professor_recording_creation' %}'" type="button">TO BE ADDED اضافه کردن ویدئو</button>
+        <button onclick="location.href='{% url 'professor_recording_creation' %}'" type="button">اضافه کردن ویدئو</button>
         <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
     {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>

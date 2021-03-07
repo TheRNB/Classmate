@@ -12,4 +12,4 @@ def validate_document_file_extension(value):
 
 def validate_score(value):
     if value > 20 or value < 0:
-        raise ValidationError('The scores should be from 0 to 20.')
+        raise ValidationError('The scores should be from 0 to 100.')

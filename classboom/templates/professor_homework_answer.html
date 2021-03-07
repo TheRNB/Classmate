@@ -28,7 +28,6 @@
           <tr>
             <th>شماره دانشجویی</th>
             <th>تاریخ آخرین ارسال</th>
-            <th>آخرین مهلت ارسال</th>
             <th>نمره فعلی</th>
             <th>تغییر نمره</th>
           </tr>
@@ -36,7 +35,6 @@
             <tr>
                 <td>{{ans.user.get_username}}</td>
                 <td>{{ans.upload_date}}</td>
-                <td><p>TO BE ADDED</p></td>
                 {% if ans.score != Null %}
                     <td>{{ans.score}}</td>
                 {% else %}

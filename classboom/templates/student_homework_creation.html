@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Create</title>
+</head>
+<body>
+    <main>
+        {% if user.is_authenticated %}
+            {% if uses.is_staff %}
+                <p>شما استاد درس هستید. لطفا برای دسترسی به تکالیف از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+            {% else %}
+                <p>{{explanation}}</p>
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" Value="آپلود!">
+                </form>
+                <br>
+                <button onclick="location.href='{% url 'student_homework' %}'" type="button">بازگشت</button>
+            {% endif %}
+        {% else %}
+            <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
