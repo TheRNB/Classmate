@@ -72,7 +72,11 @@
                     <td><a  href="{{anses.question.document.url}}" download>دانلود</a></td>
                     <td>{{anses.question.explanation}}</td>
                     <td><a href = "{% url 'student_homework_upload' anses.question.id %}">ارسال پاسخ</a></td>
-                    <td>{{anses.score}}</td>
+                    {% if anses.score %}
+                        <td>{{anses.score}}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
                 </tr>
               {% endfor %}
             </table>

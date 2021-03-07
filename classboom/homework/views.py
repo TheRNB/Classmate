@@ -89,7 +89,10 @@ class StudentHomeworkCreation(View):
         form = HomeworkUploadForm(request.POST, request.FILES)
         if form.is_valid():
             question = Question.objects.get(id=id)
-            answer = question.answer_set.get(user=request.user)
+            if question.answer_set.all():
+                answer = question.answer_set.get(user=request.user)
+            else:
+                answer = None
             if answer:
                 answer.answer_document = form.cleaned_data['answer_document']
                 answer.upload_date = datetime.now()
