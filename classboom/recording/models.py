@@ -9,4 +9,4 @@ class Recording(models.Model):
     pub_date = models.DateTimeField(default=datetime.now)
     # FileField.storage() to call the file
     # video.url to see the URL
-    video = models.FileField(upload_to='uploads/%Y/%m/%d/', validators=[validate_video_file_extension])
+    video = models.FileField(upload_to='videos', validators=[validate_video_file_extension])

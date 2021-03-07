@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stream</title>
+</head>
+<body>
+    <main>
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <p>شما استاد درس هستید. لطفا برای دسترسی به ویدئو ها از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+            {% else %}
+                <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" controls="controls">
+                    <source src="{{vid.video.url}}" type="video/mp4">
+                </video>
+                <button onclick="location.href='{% url 'professor_recording' %}'" type="button">بازگشت</button>
+            {% endif %}
+        {% else %}
+            <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

@@ -1,17 +1,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Create</title>
+    <title>Stream</title>
 </head>
 <body>
     <main>
         {% if user.is_staff %}
-            <form method="post" action="/rec/prf/">
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" name="save">آپلود!</button>
-            </form>
-            <br>
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" controls="controls">
+                <source src="{{vid.video.url}}" type="video/mp4"/>
+            </video>
             <button onclick="location.href='{% url 'professor_recording' %}'" type="button">بازگشت</button>
         {% else %}
             <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>

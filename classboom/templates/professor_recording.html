@@ -34,7 +34,7 @@
             <tr>
                 <td>{{vids.title}}</td>
                 <td>{{vids.pub_date}}</td>
-                <td><p>TO BE ADDED</p></td>
+                <td><a href="{% url 'professor_video_stream' vids.id %}">مشاهده</a></td>
             </tr>
           {% endfor %}
 

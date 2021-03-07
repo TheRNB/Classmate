@@ -16,15 +16,15 @@ class ProfessorRecording(View):
         return render(request, self.template_name, context={"videos": recording})
 
     def post(self, request):
-        form = RecordingCreationForm(request.POST)
+        form = RecordingCreationForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data["title"]
             video = form.cleaned_data["video"]
             new_video = Recording(title=title, video=video)
             new_video.save()
-            return HttpResponseRedirect("/rec/prf")
+            return redirect("professor_recording")
         else:
-            return HttpResponseRedirect("/rec/prf/prc")
+            return redirect("professor_recording_creation")
 
 
 class ProfessorRecordingCreation(View):
@@ -35,15 +35,23 @@ class ProfessorRecordingCreation(View):
         return render(request, self.template_name, context={"form": form})
 
     def post(self, request):
-        form = RecordingCreationForm(request.POST)
+        form = RecordingCreationForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data["title"]
             video = form.cleaned_data["video"]
             new_video = Recording(title=title, video=video)
             new_video.save()
-            return HttpResponseRedirect("/rec/prf")
+            return redirect("professor_recording")
         else:
-            return HttpResponseRedirect("/rec/prf/prc")
+            return redirect("professor_recording_creation")
+
+
+class ProfessorRecordingStream(View):
+    template_name = 'professor_recording_stream.html'
+
+    def get(self, request, id):
+        video = Recording.objects.get(id=id)
+        return render(request, self.template_name, context={"vid": video})
 
 
 class StudentRecording(View):

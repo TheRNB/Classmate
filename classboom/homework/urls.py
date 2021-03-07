@@ -1,5 +1,7 @@
 from django.urls import path, include
-from django.views.generic.base import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+
 from .views import *
 
 
@@ -10,4 +12,4 @@ urlpatterns = [
     path('prf/<int:id>', ProfessorHomeworkSpecificAnswer.as_view()),
     path('prf/hwc', ProfessorHomeworkCreation.as_view(), name="professor_homework_creation"),
     path('prf/', ProfessorHomework.as_view(), name="professor_homework"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

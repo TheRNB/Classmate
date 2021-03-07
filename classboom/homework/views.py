@@ -15,7 +15,7 @@ class ProfessorHomework(View):
         return render(request, self.template_name, context={"question": question})
 
     def post(self, request):
-        form = HomeworkCreationForm(request.POST)
+        form = HomeworkCreationForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data["question_title"]
             deadline = form.cleaned_data["deadline_date"]
@@ -23,6 +23,7 @@ class ProfessorHomework(View):
             document = form.cleaned_data["document"]
             new_homework = Question(question_title=title, deadline_date=deadline, explanation=info, document=document)
             new_homework.save()
+            form.save()
             return redirect("professor_homework")
         else:
             return redirect("professor_homework_creation")
@@ -35,7 +36,7 @@ class ProfessorHomeworkCreation(View):
         return render(request, self.template_name, context={"form": form})
 
     def post(self, request):
-        form = HomeworkCreationForm(request.POST)
+        form = HomeworkCreationForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data["question_title"]
             deadline = form.cleaned_data["deadline_date"]
@@ -43,6 +44,7 @@ class ProfessorHomeworkCreation(View):
             document = form.cleaned_data["document"]
             new_homework = Question(question_title=title, deadline_date=deadline, explanation=info, document=document)
             new_homework.save()
+            form.save()
             return redirect("professor_homework")
         else:
             return redirect("professor_homework_creation")

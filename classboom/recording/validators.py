@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 
 def validate_video_file_extension(value):
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
-    valid_extensions = ['.ogg', '.mp4', '.webm', '.mov', '.wmv', '.flv', '.avi', '.avchd', '.mkv']
+    valid_extensions = ['.mp4']
+    print(ext.lower())
     if not ext.lower() in valid_extensions:
         raise ValidationError('Unsupported file extension.')
