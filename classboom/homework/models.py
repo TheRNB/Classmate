@@ -17,5 +17,5 @@ class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="answer_id", null=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_document = models.FileField(upload_to="answers", validators=[validate_document_file_extension])
-    score = models.DecimalField(max_digits=4, decimal_places=2, null=True, validators=[validate_score])
+    score = models.IntegerField(null=True, validators=[validate_score])
     upload_date = models.DateTimeField(default=datetime.now)

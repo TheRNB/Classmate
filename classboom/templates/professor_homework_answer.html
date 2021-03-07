@@ -40,7 +40,13 @@
                 {% else %}
                     <td>-</td>
                 {% endif %}
-                <td><p>TO BE ADDED</p>></td>
+                <td>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <input type="number" name="newScore{{ans.id}}">
+                        <button type="submit" name="save" value="save" >ذخیره</button>
+                    </form>
+                </td>
             </tr>
           {% endfor %}
 

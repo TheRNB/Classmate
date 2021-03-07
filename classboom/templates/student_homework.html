@@ -38,8 +38,8 @@
               {% for ques in question %}
                 <tr>
                     <td>{{ques.question_title}}</td>
-                    {% if user.answer_id_list.all %}
-                        <td>{{ans.upload_date}}</td>
+                    {% if ques.deadline_date %}
+                        <td>{{ques.deadline_date}}</td>
                     {% else %}
                         <td>---</td>
                     {% endif %}

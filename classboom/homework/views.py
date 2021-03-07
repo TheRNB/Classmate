@@ -39,15 +39,14 @@ class ProfessorHomeworkSpecificAnswer(View):
         answer = Question.objects.get(id=id)
         return render(request, self.template_name, context={"answer": answer})
 
-    def get(self, request, id):
-        form = HomeworkUploadForm(request.POST)
-        if form.is_valid():
-            ans = Answer.objects.get(id=id)
-            ans.score = form.score
-            ans.save()
-            return redirect("professor_homework")
-        else:
-            return render(request, self.template_name, {"form": form})
+    def post(self, request, id):
+        ans = Question.objects.get(id=id)
+        for answers in ans.answer_set.all():
+            if (request.POST.get("newScore" + str(answers.id)) and
+                    100 >= int(request.POST.get("newScore" + str(answers.id))) >= 0):
+                answers.score = request.POST.get("newScore" + str(answers.id))
+                answers.save()
+        return redirect("professor_homework_answer", id)
 
 
 class StudentHomework(ProfessorHomework):
