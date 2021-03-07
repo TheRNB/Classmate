@@ -46,11 +46,21 @@
                     <td><a  href="{{ques.document.url}}" download>دانلود</a></td>
                     <td>{{ques.explanation}}</td>
                     <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
-                    {% if user.answer_id_list.all %}
-                        <td>TO BE ADDED</td>
+                    <td>-</td>
+                </tr>
+              {% endfor %}
+                {% for anses in answer %}
+                <tr>
+                    <td>{{anses.question.question_title}}</td>
+                    {% if anses.question.deadline_date %}
+                        <td>{{anses.question.deadline_date}}</td>
                     {% else %}
-                        <td>-</td>
+                        <td>---</td>
                     {% endif %}
+                    <td><a  href="{{anses.question.document.url}}" download>دانلود</a></td>
+                    <td>{{anses.question.explanation}}</td>
+                    <td><a href = "{% url 'student_homework_upload' anses.question.id %}">ارسال پاسخ</a></td>
+                    <td>{{anses.score}}</td>
                 </tr>
               {% endfor %}
             </table>

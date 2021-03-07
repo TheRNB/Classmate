@@ -5,7 +5,7 @@ from .models import Question, Answer
 class HomeworkCreationForm(ModelForm):
     class Meta:
         model = Question
-        fields = ['question_title', 'deadline_date', 'explanation', 'document', ]
+        fields = ['question_title', 'explanation', 'document', ]
 
 
 class HomeworkUploadForm(ModelForm):

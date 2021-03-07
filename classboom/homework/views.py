@@ -1,7 +1,8 @@
 # from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
+from datetime import datetime
 # from django.views.generic import TemplateView
 from .models import Answer, Question
 from .form import HomeworkCreationForm, HomeworkUploadForm
@@ -24,12 +25,17 @@ class ProfessorHomeworkCreation(View):
 
     def post(self, request):
         form = HomeworkCreationForm(request.POST, request.FILES)
+        print(form.is_valid())
         if form.is_valid():
-            form.save()
+            que = Question(question_title=form.cleaned_data["question_title"],
+                           explanation=form.cleaned_data["explanation"], document=form.cleaned_data["document"],
+                           deadline_date=request.POST.get("deadline_date"))
+            que.save()
             return redirect("professor_homework")
         else:
             form = HomeworkCreationForm()
-            return render(request, self.template_name, context={"form": form})
+            # return render(request, self.template_name, context={"form": form})
+            return HttpResponse("You done goofed")
 
 
 class ProfessorHomeworkSpecificAnswer(View):
@@ -52,6 +58,21 @@ class ProfessorHomeworkSpecificAnswer(View):
 class StudentHomework(ProfessorHomework):
     template_name = 'student_homework.html'
 
+    def get(self, request):
+        answers = []
+        questions = []
+        for quest in Question.objects.all():
+            if quest.answer_set.all():
+                answer = quest.answer_set.get(user=request.user)
+                if answer:
+                    answers.append(answer)
+                else:
+                    questions.append(quest)
+            else:
+                questions.append(quest)
+
+        return render(request, self.template_name, context={"question": questions, "answer": answers})
+
 
 class StudentHomeworkCreation(View):
     template_name = 'student_homework_creation.html'
@@ -65,11 +86,17 @@ class StudentHomeworkCreation(View):
         form = HomeworkUploadForm(request.POST, request.FILES)
         if form.is_valid():
             question = Question.objects.get(id=id)
-            answer = question.answer_set.create(user=request.user)
-            answer.answer_document = form.cleaned_data['answer_document']
-            # form.save()
+            answer = question.answer_set.get(user=request.user)
+            if answer:
+                answer.answer_document = form.cleaned_data['answer_document']
+                answer.upload_date = datetime.now()
+            else:
+                answer = question.answer_set.create(user=request.user)
+                answer.answer_document = form.cleaned_data['answer_document']
+
             answer.save()
             return redirect("student_homework")
+
         else:
             form = HomeworkUploadForm()
             explanation = Question.objects.get(id=id).explanation
