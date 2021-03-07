@@ -45,7 +45,15 @@
                     {% endif %}
                     <td><a  href="{{ques.document.url}}" download>دانلود</a></td>
                     <td>{{ques.explanation}}</td>
-                    <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                    {% if current_time.date < ques.deadline_date.date %}
+                        <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                    {% elif current_time.date == ques.deadline_date.date %}
+                        {% if current_time.time < ques.deadline_date.time %}
+                            <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                        {% endif %}
+                    {% else %}
+                        <td>مهلت ارسال پاسخ تمام شده است</td>
+                    {% endif %}
                     <td>-</td>
                 </tr>
               {% endfor %}

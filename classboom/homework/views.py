@@ -61,7 +61,9 @@ class StudentHomework(ProfessorHomework):
     def get(self, request):
         answers = []
         questions = []
+        current_time = datetime.now()
         for quest in Question.objects.all():
+            print("$$$$", quest.deadline_date)
             if quest.answer_set.all():
                 answer = quest.answer_set.get(user=request.user)
                 if answer:
@@ -70,8 +72,9 @@ class StudentHomework(ProfessorHomework):
                     questions.append(quest)
             else:
                 questions.append(quest)
-
-        return render(request, self.template_name, context={"question": questions, "answer": answers})
+        print("####", current_time)
+        return render(request, self.template_name, context={"question": questions, "answer": answers,
+                                                            "current_time": current_time})
 
 
 class StudentHomeworkCreation(View):
