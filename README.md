@@ -14,13 +14,14 @@ Classboom is an easy-to-use learning platform. This project was initially the cl
 ### Installaion: ###
 Installation is super easy as this is a django server, just clone the repository and setup your personal prefrences in manage.py. It even comes with a temporary front-end so that you can tune the settings to your liking.
 
+ADD THE EXACT COMMANDS!!
+
 ### Execution: ###
 After you've set your desired settings, you can easily run the server using python and django with a single command:
 
-` python3 manage.py runserver `
-
-### Demo: ###
-The main area of concentration on this project was the back-end, however here's some photos with the temporary front-end so that you can see the various functinalities it provides:
+```
+python3 manage.py runserver
+```
 
 ### Contributors: ###
-This project was mainly developed by Aaron Bateni (myself).
+This project was mainly developed by [Aaron Bateni](https://github.com/TheRNB).
