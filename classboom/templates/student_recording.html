@@ -22,28 +22,28 @@
     <body>
     {% if user.is_authenticated %}
         {% if user.is_staff %}
-            <p>شما استاد درس هستید. لطفا برای دسترسی به ویدئو ها از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+            <p>You are the professor, please access the recordings page from <a href="/">here</a></p>
         {% else %}
-            <h2>لیست ویدئو ها</h2>
+            <h2>Recordings</h2>
 
             <table>
               <tr>
-                <th>عنوان</th>
-                <th>تاریخ آپلود</th>
-                <th>مشاهده</th>
+                <th>Title</th>
+                <th>Upload Date</th>
+                <th>Watch</th>
               </tr>
               {% for vids in videos %}
                 <tr>
                     <td>{{vids.title}}</td>
                     <td>{{vids.pub_date}}</td>
-                    <td><a href="{% url 'student_recording_stream' vids.id %}">مشاهده</a></td>
+                    <td><a href="{% url 'student_recording_stream' vids.id %}">Stream</a></td>
                 </tr>
               {% endfor %}
             </table>
         {% endif %}
-        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
+        <button onclick="location.href='{% url 'home' %}'" type="button">Return</button>
     {% else %}
-        <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
     {% endif %}
     </body>
 </html>

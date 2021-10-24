@@ -22,18 +22,18 @@
     <body>
     {% if user.is_authenticated %}
         {% if user.is_staff %}
-            <p>شما استاد درس هستید. لطفا برای دسترسی به تکالیف از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+            <p>You are the professor, please access the assignments page from <a href="/">here</a></p>
         {% else %}
-            <h2>لیست تکالیف</h2>
+            <h2>Assignments</h2>
 
             <table>
               <tr>
-                <th>عنوان</th>
-                <th>آخرین تاریخ ارسال</th>
-                <th>فایل سوالات</th>
-                <th>توضیحات اضافی</th>
-                <th>ارسال پاسخ</th>
-                <th>نمره فعلی</th>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Attached File</th>
+                <th>Further Information</th>
+                <th>Upload an answer</th>
+                <th>Current Score</th>
               </tr>
               {% for ques in question %}
                 <tr>
@@ -43,19 +43,19 @@
                     {% else %}
                         <td>---</td>
                     {% endif %}
-                    <td><a  href="{{ques.document.url}}" download>دانلود</a></td>
+                    <td><a  href="{{ques.document.url}}" download>Download</a></td>
                     <td>{{ques.explanation}}</td>
                     {% if current_time.date < ques.deadline_date.date %}
-                        <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                        <td><a href = "{% url 'student_homework_upload' ques.id %}">Upload</a></td>
                     {% else %}
                         {% if current_time.date == ques.deadline_date.date %}
                             {% if current_time.time < ques.deadline_date.time %}
-                                <td><a href = "{% url 'student_homework_upload' ques.id %}">ارسال پاسخ</a></td>
+                                <td><a href = "{% url 'student_homework_upload' ques.id %}">Upload</a></td>
                             {% else %}
-                                <td>مهلت ارسال پاسخ تمام شده است</td>
+                                <td>You've missed the deadline.</td>
                             {% endif %}
                         {% else %}
-                            <td>مهلت ارسال پاسخ تمام شده است</td>
+                            <td>You've missed the deadline.</td>
                         {% endif %}
                     {% endif %}
                     <td>-</td>
@@ -69,9 +69,9 @@
                     {% else %}
                         <td>---</td>
                     {% endif %}
-                    <td><a  href="{{anses.question.document.url}}" download>دانلود</a></td>
+                    <td><a  href="{{anses.question.document.url}}" download>Download</a></td>
                     <td>{{anses.question.explanation}}</td>
-                    <td><a href = "{% url 'student_homework_upload' anses.question.id %}">ارسال پاسخ</a></td>
+                    <td><a href = "{% url 'student_homework_upload' anses.question.id %}">Upload</a></td>
                     {% if anses.score %}
                         <td>{{anses.score}}</td>
                     {% else %}
@@ -81,9 +81,9 @@
               {% endfor %}
             </table>
         {% endif %}
-        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
+        <button onclick="location.href='{% url 'home' %}'" type="button">Return</button>
     {% else %}
-        <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
     {% endif %}
     </body>
 </html>

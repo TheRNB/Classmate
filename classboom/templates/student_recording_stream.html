@@ -7,15 +7,15 @@
     <main>
         {% if user.is_authenticated %}
             {% if user.is_staff %}
-                <p>شما استاد درس هستید. لطفا برای دسترسی به ویدئو ها از<a href="/">صفحه</a>خودتان اقدام کنید.</p>
+                <p>You are the professor, please access the recordings page from <a href="/">here</a></p>
             {% else %}
                 <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" controls="controls">
                     <source src="{{vid.video.url}}" type="video/mp4">
                 </video>
-                <button onclick="location.href='{% url 'student_recording' %}'" type="button">بازگشت</button>
+                <button onclick="location.href='{% url 'student_recording' %}'" type="button">Return</button>
             {% endif %}
         {% else %}
-            <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+            <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
         {% endif %}
     </main>
 </body>
