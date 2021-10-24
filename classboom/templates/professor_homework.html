@@ -22,33 +22,33 @@
 
     <body>
     {% if user.is_staff %}
-        <h2>لیست تکالیف</h2>
+        <h2>Assignments</h2>
 
         <table>
           <tr>
-            <th>عنوان</th>
-            <th>تاریخ ایجاد</th>
-            <th>آخرین مهلت ارسال</th>
-            <th>فایل سوالات</th>
-            <th>توضیحات اضافی</th>
+            <th>Titel</th>
+            <th>Creation Date</th>
+            <th>Deadline</th>
+            <th>Attached File</th>
+            <th>Further Information</th>
           </tr>
           {% for ques in question %}
             <tr>
                 <td><a href="/hw/prf/{{ques.id}}" >{{ques.question_title}}</a></td>
                 <td>{{ques.pub_date}}</td>
                 <td>{{ques.deadline_date}}</td>
-                <td><a  href="{{ques.document.url}}" download>دانلود</a></td>
+                <td><a  href="{{ques.document.url}}" download>Download</a></td>
                 <td>{{ques.explanation}}</td>
             </tr>
           {% endfor %}
 
         </table>
 
-        <button onclick="location.href='{% url 'professor_homework_creation' %}'" type="button">اضافه کردن تمرین</button>
+        <button onclick="location.href='{% url 'professor_homework_creation' %}'" type="button">Add Assignment</button>
         <br>
-        <button onclick="location.href='{% url 'home' %}'" type="button">بازگشت</button>
+        <button onclick="location.href='{% url 'home' %}'" type="button">Return</button>
     {% else %}
-            <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
     {% endif %}
     </body>
 </html>

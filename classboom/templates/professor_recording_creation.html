@@ -9,12 +9,12 @@
             <form method="post" action="" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
-                <input type="submit" Value="آپلود!">
+                <input type="submit" Value="Upload!">
             </form>
             <br>
-            <button onclick="location.href='{% url 'professor_recording' %}'" type="button">بازگشت</button>
+            <button onclick="location.href='{% url 'professor_recording' %}'" type="button">Return</button>
         {% else %}
-            <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+            <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
         {% endif %}
     </main>
 </body>

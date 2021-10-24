@@ -22,21 +22,21 @@
 
     <body>
     {% if user.is_staff %}
-        <h2>لیست پاسخ ها</h2>
+        <h2>Submitted Answers:</h2>
 
         <table>
           <tr>
-            <th>شماره دانشجویی</th>
-            <th>تاریخ آخرین ارسال</th>
-            <th>فایل ارسالی</th>
-            <th>نمره فعلی</th>
-            <th>تغییر نمره</th>
+            <th> Student Number </th>
+            <th> Last Submission Date </th>
+            <th> Attached File </th>
+            <th> Current Score </th>
+            <th> Change Score </th>
           </tr>
           {% for ans in answer.answer_set.all %}
             <tr>
                 <td>{{ans.user.get_username}}</td>
                 <td>{{ans.upload_date}}</td>
-                <td><a  href="{{ans.answer_document.url}}" download>دانلود</a></td>
+                <td><a  href="{{ans.answer_document.url}}" download>Download</a></td>
                 {% if ans.score != Null %}
                     <td>{{ans.score}}</td>
                 {% else %}
@@ -46,7 +46,7 @@
                     <form method="post" action="">
                         {% csrf_token %}
                         <input type="number" name="newScore{{ans.id}}">
-                        <button type="submit" name="save" value="save" >ذخیره</button>
+                        <button type="submit" name="save" value="save" >Save</button>
                     </form>
                 </td>
             </tr>
@@ -54,9 +54,9 @@
 
         </table>
         <br>
-        <button onclick="location.href='{% url 'professor_homework' %}'" type="button">بازگشت</button>
+        <button onclick="location.href='{% url 'professor_homework' %}'" type="button">Return</button>
     {% else %}
-        <p>شما اجازه دسترسی به این صفحه را ندارید. لطفا به  <a href="/">خانه</a> برگردید.</p>
+        <p> You are not authorized to access this page, please return <a href="/">home</a> </p>
     {% endif %}
     </body>
 </html>
