@@ -5,11 +5,11 @@
 </head>
 <body>
   <main>
-    <h2>ورود</h2>
-    <form method="post" action='/login/' enctype="multipart/form-data">
+    <h2>log in</h2>
+    <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" id="submit">وارد شو!</button>
+      <button type="submit">submit!</button>
     </form>
   </main>
 </body>

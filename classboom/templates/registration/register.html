@@ -5,11 +5,11 @@
 </head>
 <body>
   <main>
-    <h2>ساخت حساب دانشجو</h2>
+    <h2>Create student account</h2>
     <form method="post" action='{% url "reg" %}' enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" id="submit">ساخت</button>
+      <button type="submit" id="submit">Create</button>
     </form>
   </main>
 </body>
