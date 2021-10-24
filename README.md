@@ -1,4 +1,4 @@
-![alt text](https://github.com/TheRNB/ClassBoom/blob/main/logo.png)
+![alt text](https://raw.githubusercontent.com/TheRNB/ClassBoom/main/logo.png)
 # ClassBoom #
 
 Classboom is an attempt to develop an easy-to-use learning platform. This project was initially the class project of the Basic Programming course at the university of Tehran but I decided to move forward with it and make it more advanced. Classboom is designed with simplicity in mind and seeks to provide intuitive functionalities, especially the ability to use various different themes for it's front-end to suit every academy's needs.
