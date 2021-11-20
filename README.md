@@ -17,8 +17,8 @@ first of all you should install VirtualEnv:
 pip install virtualenv
 ```
 (if you don't already have pip installed, see [here](https://pip.pypa.io/en/stable/installation/))
-now go to your desired directory and type in:
 #### Creating a VirtualEnv ####
+now go to your desired directory and type in:
 ```
 virtualenv ClassBoomVEnv
 ```
@@ -37,7 +37,7 @@ pip install -r requirements.txt
 ```
 
 ### Execution: ###
-You can setup your desired setting in classboom/settings.py. Once done, you can run the server by:
+You can choose your desired settings in classboom/settings.py. Once done, you can run the server by:
 ```
 ./manage.py migrate
 python3 manage.py runserver
