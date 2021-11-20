@@ -18,9 +18,9 @@
                     <br>
                     <button onclick="location.href='{% url 'student_homework' %}'" type="button">Assignments</button>
                 {% endif %}
-            <p>If you want to sign out, please click <a href="{% url 'logout' %}">here</a> </p>
+            <p>If you want to sign out, please click <a href="/logout">here</a> </p>
         {% else %}
-            <p>Please <a href="{% url 'login' %}">log in</a> first</p>
+            <p>Please <a href="/login">log in</a> first</p>
             <p>If you are the admin please <a href="/admin">log in</a> from here </p>
         {% endif %}
     </main>
