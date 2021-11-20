@@ -12,18 +12,25 @@ Classboom is an easy-to-use learning platform. This project was initially the cl
     - View the scores given to the said answers
 
 ### Installaion: ###
-# VirtualEnv #
+#### VirtualEnv ####
 first of all you should install VirtualEnv:
-` pip install virtualenv `
+```pip install virtualenv
+```
 (if you don't already have pip installed, see [here](https://pip.pypa.io/en/stable/installation/))
 now go to your desired directory and type in:
-# Creating a VirtualEnv #
-` virtualenv ClassBoomVEnv `
-# Activating the VirtualEnv #
-` source ClassBoomVEnv/venv/bin/activate `
-# Cloning the project #
-` git clone https://github.com/TheRNB/ClassBoom.git `
-# Installing the dependencies #
+#### Creating a VirtualEnv ####
+```
+virtualenv ClassBoomVEnv
+```
+#### Activating the VirtualEnv ####
+```
+source ClassBoomVEnv/venv/bin/activate
+```
+#### Cloning the project ####
+```
+git clone https://github.com/TheRNB/ClassBoom.git
+```
+#### Installing the dependencies ####
 ```
 cd ClassBoom
 pip install -r requirements.txt
